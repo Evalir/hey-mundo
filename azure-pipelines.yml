@@ -1,0 +1,25 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: Npm@0
+  displayName: 'Task: Installing Dependencies'
+  inputs:
+    cwd: './'
+    command: 'install'
+  
+- task: Npm@1
+  displayName: 'Task: Publishing package'
+  inputs:
+    command: 'publish'
+    workingDir: './'
+    publishRegistry: 'useFeed'
+    publishFeed: '028ac351-4b94-4211-ac57-6d11a5146bb8/de8cf13a-bdbc-4a77-9bcc-5aaadff1e8a7'
